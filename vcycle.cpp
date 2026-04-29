@@ -6,7 +6,6 @@
 #include "coefficients.h"
 
 #include <cmath>
-#include <iostream>
 
 void VCycleSolver::init(int N1, int N2,
                         const ProblemParams& params,
@@ -50,7 +49,6 @@ void VCycleSolver::prepareCoefficients(double tau, double tj, double tj_prev)
 void VCycleSolver::doVCycle()
 {
     for (int lev = 0; lev < m_numLevels - 1; lev++) {
-        levels[lev].u_saved = levels[lev].y;
         gaussSeidel(levels[lev], m_nu1);
         computeResidual(levels[lev]);
         restriction(levels[lev], levels[lev + 1]);

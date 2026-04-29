@@ -192,7 +192,7 @@ void solveMultigrid(int N1, int N2, const ProblemParams& params,
 
 // Сравнительная таблица сходимости: MG vs GS на разных сетках
 void convergenceStudy(const ProblemParams& params,
-                      int numLevelsRequested, int nu1, int nu2)
+                      int numLevelsRequested, int nu1, int nu2,double tau)
 {
     std::cout << "============================================" << std::endl;
     std::cout << "Convergence study: Test problem "
@@ -209,7 +209,6 @@ void convergenceStudy(const ProblemParams& params,
     std::cout << std::string(78, '-') << std::endl;
 
     std::vector<int> sizes = {16, 32, 64, 128};
-    double tau = 0.01;
 
     for (int N : sizes) {
         int N1 = N;
@@ -428,7 +427,7 @@ int main()
         int nu2 = 2;
 
         std::cout << "============================================" << std::endl;
-        std::cout << "  TEST PROBLEM 1 (constant coefficients)    " << std::endl;
+        std::cout << "  TEST PROBLEM 1                            " << std::endl;
         std::cout << "  k1 = k2 = 1                               " << std::endl;
         std::cout << "  u(x1,x2,t) = x1^2 + x2^2 + t              " << std::endl;
         std::cout << "  f = -3                                    " << std::endl;
@@ -442,7 +441,7 @@ int main()
         solveGaussSeidel(N1, N2, params, tau, Nt);
 
         // Таблица сходимости на разных сетках
-        convergenceStudy(params, numLevels, nu1, nu2);
+        convergenceStudy(params, numLevels, nu1, nu2, tau);
 
         // Влияние числа уровней
         levelsStudy(params, N1, tau);
@@ -469,7 +468,7 @@ int main()
         int nu2 = 2;
 
         std::cout << "============================================" << std::endl;
-        std::cout << "  TEST PROBLEM 2 (variable coefficients)    " << std::endl;
+        std::cout << "  TEST PROBLEM 2                            " << std::endl;
         std::cout << "  k1 = k2 = exp(x1+x2+t)                    " << std::endl;
         std::cout << "  u(x1,x2,t) = exp(x1+x2+t)                 " << std::endl;
         std::cout << "  f = exp(x1+x2+t) - 4*exp(2*(x1+x2+t))     " << std::endl;
@@ -483,7 +482,7 @@ int main()
         solveGaussSeidel(N1, N2, params, tau, Nt);
 
         // Таблица сходимости
-        convergenceStudy(params, numLevels, nu1, nu2);
+        convergenceStudy(params, numLevels, nu1, nu2, tau);
 
         // Влияние числа уровней
         levelsStudy(params, N1, tau);
@@ -492,9 +491,7 @@ int main()
         smoothingStudy(params, N1, tau, numLevels);
     }
 
-    std::cout << "============================================" << std::endl;
     std::cout << "  All tests completed successfully.         " << std::endl;
-    std::cout << "============================================" << std::endl;
 
     return 0;
 }

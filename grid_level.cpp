@@ -8,7 +8,7 @@ void GridLevel::allocate(int N1_, int N2_, double h1_, double h2_)
     h2 = h2_;
 
     int rows = N1 + 1;
-    int cols = N2 + 1; // индексы 0..N2, реально используем 1..N2-1
+    int cols = N2 + 1;
 
     auto make2D = [&]() -> std::vector<std::vector<double>> {
         return std::vector<std::vector<double>>(rows, std::vector<double>(cols, 0.0));
@@ -22,8 +22,6 @@ void GridLevel::allocate(int N1_, int N2_, double h1_, double h2_)
     cB = make2D();
     f = make2D();
     r = make2D();
-    u_saved = make2D();
-    f_saved = make2D();
 }
 
 void GridLevel::zeroY()

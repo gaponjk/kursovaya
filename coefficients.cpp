@@ -27,7 +27,6 @@ void computeCoefficients(GridLevel& level, const ProblemParams& params,
 
             level.cA[i][k] = -(h1*h1/(h2*h2)) * k2_minus;
             level.cB[i][k] = -(h1*h1/(h2*h2)) * k2_plus;
-
             level.cc[i][k] = h1*h1/tau
                              + k1_plus + k1_minus
                              + (h1*h1/(h2*h2)) * (k2_plus + k2_minus);

@@ -28,10 +28,10 @@ void computeResidual(GridLevel& level)
     for (int i = 1; i <= N1 - 1; i++) {
         for (int k = 1; k <= N2 - 1; k++) {
             double Ay = cc[i][k] * y[i][k]
-                        + ac[i][k] * y[i-1][k]
-                        + bc[i][k] * y[i+1][k]
-                        + cA[i][k] * y[i][k-1]
-                        + cB[i][k] * y[i][k+1];
+                        + ac[i][k] * y[i][k-1]
+                        + bc[i][k] * y[i][k+1]
+                        + cA[i][k] * y[i-1][k]
+                        + cB[i][k] * y[i+1][k];
             r[i][k] = f[i][k] - Ay;
         }
     }
